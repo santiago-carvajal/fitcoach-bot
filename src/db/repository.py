@@ -117,16 +117,6 @@ def get_latest_diet_record() -> Optional[DietRecord]:
         return _latest_active(session, DietRecord)
 
 
-def get_latest_routine() -> Optional[WorkoutRoutine]:
-    record = get_latest_routine_record()
-    return WorkoutRoutine.model_validate(record.data) if record else None
-
-
-def get_latest_diet() -> Optional[DietPlan]:
-    record = get_latest_diet_record()
-    return DietPlan.model_validate(record.data) if record else None
-
-
 def save_routine(routine: WorkoutRoutine, week_number: int) -> RoutineRecord:
     with get_session() as session:
         for record in session.exec(
@@ -196,8 +186,10 @@ def load_full_state() -> GraphState:
     has_profile_data = any(
         getattr(profile, field) not in (None, [], "") for field in profile.model_fields
     )
-    routine = get_latest_routine()
-    diet = get_latest_diet()
+    routine_record = get_latest_routine_record()
+    diet_record = get_latest_diet_record()
+    routine = WorkoutRoutine.model_validate(routine_record.data) if routine_record else None
+    diet = DietPlan.model_validate(diet_record.data) if diet_record else None
     return {
         "messages": load_messages(),
         "user_profile": profile if has_profile_data else None,
@@ -210,4 +202,7 @@ def load_full_state() -> GraphState:
         "week_number": current_week_number(),
         "previous_routine": routine,
         "previous_diet": diet,
+        # Semana en que se generó el plan activo: dispara el check-in semanal.
+        "active_plan_week": routine_record.week_number if routine_record else None,
+        "feedback_classification": None,
     }

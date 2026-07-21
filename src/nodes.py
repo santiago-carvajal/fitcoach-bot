@@ -6,7 +6,7 @@ from src.prompts.system_prompt import SYSTEM_PROMPT
 from src.retrieval.exercise_catalog import format_candidates, retrieve_exercises
 from src.retrieval.food_catalog import format_food_candidates, retrieve_foods
 from src.schemas.output_schemas import DietPlan, UserProfile, WorkoutRoutine
-from src.schemas.safety_schema import SafetyClassification
+from src.schemas.safety_schema import FeedbackClassification, SafetyClassification
 from src.state import GraphState
 
 
@@ -157,6 +157,101 @@ def ask_missing_node(state: GraphState) -> GraphState:
     }
 
 
+def process_feedback_node(state: GraphState) -> GraphState:
+    """Con un plan ya activo (stage 'done'), clasifica el feedback del usuario y
+    decide si ajustar rutina+dieta o responder de forma conversacional. El
+    guardrail de seguridad ya corrió antes en el grafo, así que aquí nunca llega
+    una lesión/condición/embarazo sin derivar primero (esa regla tiene
+    prioridad sobre esta lógica de progresión)."""
+    classifier = llm.with_structured_output(FeedbackClassification)
+    last_user_message = next(
+        (m.content for m in reversed(state["messages"]) if isinstance(m, HumanMessage)),
+        "",
+    )
+    if not last_user_message:
+        return {**state, "feedback_classification": None}
+
+    classification = classifier.invoke(
+        [
+            SystemMessage(
+                content=(
+                    "El usuario ya tiene una rutina y una dieta activas. "
+                    "Clasifica su último mensaje. Marca wants_regeneration=True "
+                    "solo si el feedback implica ajustar el plan: lo siente muy "
+                    "fácil o muy difícil, o cambió su logística (días, equipo, "
+                    "horario, duración). Un comentario casual, una duda puntual "
+                    "o que esté conforme es wants_regeneration=False."
+                )
+            ),
+            HumanMessage(content=last_user_message),
+        ]
+    )
+
+    # Semana ISO codificada como AAAASS (ver current_week_number): al ser
+    # monótona (semana <= 53 < 100), un '>' basta para saber si ya pasó una
+    # semana completa desde que se generó el plan activo.
+    week_elapsed = (
+        state.get("active_plan_week") is not None
+        and state["week_number"] > state["active_plan_week"]
+    )
+    feedback_notes = classification.summary or last_user_message
+
+    if classification.wants_regeneration:
+        # Deja el feedback como contexto del ajuste (generate_routine/diet lo
+        # incorporan cuando hay previous_routine/previous_diet) y ruteamos a
+        # regenerar; el mensaje al usuario lo arma después format_output.
+        return {
+            **state,
+            "feedback_notes": feedback_notes,
+            "feedback_classification": classification.model_dump(),
+        }
+
+    # No pide ajuste: respuesta conversacional. Si ya pasó una semana ISO
+    # completa desde el plan activo, la aprovechamos para ofrecer un check-in.
+    if week_elapsed:
+        instruction = (
+            "El usuario no pidió cambios, pero ya pasó una semana completa "
+            "desde su plan actual. Respóndele de forma breve y natural y, de "
+            "paso, ofrécele hacer un check-in para ajustar su rutina y dieta "
+            "si quiere seguir progresando (ofrécelo, no lo obligues)."
+        )
+    else:
+        instruction = (
+            "El usuario no pidió cambios en su plan. Respóndele de forma "
+            "breve, natural y motivadora, sin regenerar la rutina ni la dieta."
+        )
+    response = llm.invoke(
+        [SystemMessage(content=SYSTEM_PROMPT)]
+        + state["messages"]
+        + [HumanMessage(content=instruction)]
+    )
+    return {
+        **state,
+        "feedback_notes": feedback_notes,
+        "feedback_classification": classification.model_dump(),
+        "messages": state["messages"] + [AIMessage(content=response.content)],
+    }
+
+
+def _adjustment_block(previous, feedback, plan_noun: str, adjust_hint: str) -> str:
+    """Bloque de prompt que convierte la generación en un AJUSTE del plan previo
+    (rutina o dieta) según el feedback. Vacío en la primera generación (sin
+    plan previo ni feedback), para no alterar ese flujo. plan_noun nombra el
+    plan ('plan de entrenamiento' / 'plan de alimentación') y adjust_hint da la
+    pista de ajuste específica de cada uno."""
+    if not (previous and feedback):
+        return ""
+    return (
+        f"AJUSTE POR FEEDBACK: el usuario ya venía con este {plan_noun} "
+        f"(JSON):\n{previous.model_dump_json()}\n"
+        f'Y dio este feedback: "{feedback}".\n'
+        f"Genera una versión AJUSTADA de ese {plan_noun} que responda al "
+        "feedback (no uno nuevo sin relación): conserva lo que funcionaba y "
+        f"{adjust_hint} Sigue anclado únicamente al catálogo permitido de "
+        "abajo.\n\n"
+    )
+
+
 def generate_routine_node(state: GraphState) -> GraphState:
     """Genera la rutina anclada en el catálogo real: los candidatos ya vienen
     filtrados por el equipo del usuario y rankeados hacia su objetivo, y el
@@ -164,6 +259,13 @@ def generate_routine_node(state: GraphState) -> GraphState:
     # 20 candidatos: con el minimo de 5 ejercicios por dia, 15 se quedaban
     # cortos de variedad por focus (sobre todo en el tier sin_equipo).
     candidates = retrieve_exercises(state["user_profile"], num_results=20)
+    adjustment = _adjustment_block(
+        state.get("previous_routine"),
+        state.get("feedback_notes"),
+        "plan de entrenamiento",
+        "cambia lo que el feedback indica: sube o baja intensidad/volumen, "
+        "reemplaza ejercicios problemáticos y adapta a la nueva logística.",
+    )
     generator = llm.with_structured_output(WorkoutRoutine)
     routine = generator.invoke(
         [
@@ -172,6 +274,7 @@ def generate_routine_node(state: GraphState) -> GraphState:
                 content=(
                     "Genera una rutina de ejercicios para este perfil "
                     f"(JSON): {state['user_profile'].model_dump_json()}\n\n"
+                    f"{adjustment}"
                     "CATÁLOGO DE EJERCICIOS PERMITIDOS (ya filtrado según el "
                     "equipo declarado por el usuario y priorizado según su "
                     "objetivo):\n"
@@ -207,6 +310,12 @@ def generate_diet_node(state: GraphState) -> GraphState:
     su objetivo, y el prompt prohíbe inventar alimentos o valores fuera de esa
     lista."""
     candidates = retrieve_foods(state["user_profile"], num_results=25)
+    adjustment = _adjustment_block(
+        state.get("previous_diet"),
+        state.get("feedback_notes"),
+        "plan de alimentación",
+        "ajusta lo que el feedback indica.",
+    )
     generator = llm.with_structured_output(DietPlan)
     diet = generator.invoke(
         [
@@ -215,6 +324,7 @@ def generate_diet_node(state: GraphState) -> GraphState:
                 content=(
                     "Genera un plan de alimentación para este perfil "
                     f"(JSON): {state['user_profile'].model_dump_json()}\n\n"
+                    f"{adjustment}"
                     "CATÁLOGO DE ALIMENTOS PERMITIDOS (subconjunto de USDA "
                     "FoodData Central, ya depurado según las alergias y "
                     "restricciones declaradas por el usuario y priorizado "

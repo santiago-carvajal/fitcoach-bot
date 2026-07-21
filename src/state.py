@@ -17,3 +17,10 @@ class GraphState(TypedDict):
     week_number: int
     previous_routine: Optional[WorkoutRoutine]
     previous_diet: Optional[DietPlan]
+    # Semana ISO (AAAASS) en que se generó el plan activo; None si aún no hay
+    # plan. Sirve para detectar que pasó una semana completa y ofrecer check-in.
+    active_plan_week: Optional[int]
+    # Clasificación del feedback del último turno (dict de FeedbackClassification),
+    # que process_feedback_node deja para rutear la regeneración y para que la
+    # capa de persistencia guarde el FeedbackRecord. None si no se clasificó.
+    feedback_classification: Optional[dict]
