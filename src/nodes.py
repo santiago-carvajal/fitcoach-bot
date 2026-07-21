@@ -160,7 +160,9 @@ def generate_routine_node(state: GraphState) -> GraphState:
     """Genera la rutina anclada en el catálogo real: los candidatos ya vienen
     filtrados por el equipo del usuario y rankeados hacia su objetivo, y el
     prompt prohíbe inventar ejercicios fuera de esa lista."""
-    candidates = retrieve_exercises(state["user_profile"])
+    # 20 candidatos: con el minimo de 5 ejercicios por dia, 15 se quedaban
+    # cortos de variedad por focus (sobre todo en el tier sin_equipo).
+    candidates = retrieve_exercises(state["user_profile"], num_results=20)
     generator = llm.with_structured_output(WorkoutRoutine)
     routine = generator.invoke(
         [
@@ -186,7 +188,11 @@ def generate_routine_node(state: GraphState) -> GraphState:
                     "- Excepción: los ejercicios de foco Core o Cardio pueden "
                     "complementar cualquier día.\n"
                     "- Si un ejercicio no encaja con el focus de ningún día, "
-                    "simplemente no lo uses."
+                    "simplemente no lo uses.\n"
+                    "- Cada día debe incluir MÍNIMO 5 ejercicios. Puedes "
+                    "repetir un ejercicio del catálogo en más de un día si "
+                    "hace falta para completarlo, y apoyarte en Core/Cardio "
+                    "como complemento."
                 )
             ),
         ]
