@@ -1,0 +1,19 @@
+name,focus,equipment,movement_type,muscle_groups,default_sets,default_reps,rest_seconds,notes
+Sentadilla con peso corporal,Piernas,sin_equipo,empuje,cuadriceps gluteos,3,12-15,60,Mantene el pecho arriba y baja hasta que los muslos queden paralelos al piso.
+Flexiones de pecho,Empuje,sin_equipo,empuje,pecho triceps hombros,3,8-15,60,Apoya las rodillas si hace falta para ajustar la dificultad.
+Plancha abdominal,Core,sin_equipo,isometrico,abdomen zona media,3,30-45s,45,Mantene la cadera alineada sin hundir la espalda baja.
+Zancadas alternadas,Piernas,sin_equipo,empuje,cuadriceps gluteos,3,10-12 por pierna,60,Baja controlado la rodilla de atras casi toca el piso.
+Dominadas asistidas con banda,Espalda,sin_equipo,traccion,espalda biceps,3,6-10,90,Si no hay banda reemplazar por remo invertido en mesa baja.
+Puente de gluteo,Piernas,sin_equipo,empuje de cadera,gluteos isquiotibiales,3,12-15,45,Apreta el gluteo arriba un segundo antes de bajar.
+Eliptica o cinta,Cardio,sin_equipo,cardio,sistema cardiovascular,1,20-30 min,0,Ritmo moderado deberias poder hablar en frases cortas mientras entrenas.
+Burpees,Full body,sin_equipo,cardio,full body,3,30-45s,45,Escala la intensidad quitando el salto final si hace falta.
+Remo con mancuerna a una mano,Espalda,casa_mancuernas,traccion,espalda biceps,3,10-12 por lado,60,Apoya una mano y rodilla en un banco para estabilizar el torso.
+Press de hombros con mancuernas,Hombros,casa_mancuernas,empuje,hombros triceps,3,8-12,60,Evita arquear la espalda baja al empujar.
+Curl de biceps con mancuernas,Brazos,casa_mancuernas,traccion,biceps,3,10-15,45,Controla la bajada no uses impulso de cadera.
+Peso muerto rumano con mancuernas,Piernas,casa_mancuernas,bisagra de cadera,isquiotibiales gluteos,3,10-12,90,Espalda neutra las mancuernas bajan pegadas a las piernas.
+Sentadilla goblet,Piernas,casa_mancuernas,empuje,cuadriceps gluteos,3,10-15,75,Sosten la mancuerna contra el pecho con ambas manos.
+Press de banca con barra,Empuje,gimnasio_completo,empuje,pecho triceps hombros,4,6-10,120,Pedi spotter para cargas cercanas al maximo.
+Sentadilla con barra,Piernas,gimnasio_completo,empuje,cuadriceps gluteos,4,5-8,120,Usa el rack de seguridad si entrenas solo.
+Peso muerto convencional,Espalda,gimnasio_completo,bisagra de cadera,espalda isquiotibiales,4,5-8,150,Prioriza tecnica sobre carga especialmente al empezar.
+Jalon al pecho en polea,Espalda,gimnasio_completo,traccion,espalda biceps,3,10-12,75,Lleva el torso ligeramente hacia atras sin balancear el cuerpo.
+Prensa de piernas,Piernas,gimnasio_completo,empuje,cuadriceps gluteos,3,10-15,90,No bloquees las rodillas por completo arriba.
