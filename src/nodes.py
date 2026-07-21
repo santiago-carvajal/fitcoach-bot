@@ -177,7 +177,16 @@ def generate_routine_node(state: GraphState) -> GraphState:
                     "nombres exactos. No inventes ejercicios fuera de la "
                     "lista; solo se permiten variantes triviales de ejecución "
                     "(por ejemplo cambiar agarre, tempo o apoyo) indicadas en "
-                    "las notas del ejercicio."
+                    "las notas del ejercicio.\n\n"
+                    "Reglas de composición de los días:\n"
+                    "- Cada día declara un focus, y cada ejercicio de ese día "
+                    "debe ser coherente con ese focus según el campo 'foco' "
+                    "del catálogo (ej.: en un día de Piernas no va un remo ni "
+                    "un press de pecho).\n"
+                    "- Excepción: los ejercicios de foco Core o Cardio pueden "
+                    "complementar cualquier día.\n"
+                    "- Si un ejercicio no encaja con el focus de ningún día, "
+                    "simplemente no lo uses."
                 )
             ),
         ]
