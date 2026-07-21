@@ -18,7 +18,9 @@ from src.schemas.output_schemas import (  # noqa: E402
 def make_profile():
     """Factory de perfiles completos; varía solo equipo y objetivo."""
 
-    def _make(equipment: Equipment, goal: Goal = Goal.GAIN_MUSCLE) -> UserProfile:
+    def _make(
+        equipment: Equipment, goal: Goal = Goal.GAIN_MUSCLE, **overrides
+    ) -> UserProfile:
         return UserProfile(
             age=30,
             sex="masculino",
@@ -29,6 +31,7 @@ def make_profile():
             days_per_week=3,
             session_duration_min=60,
             equipment=equipment,
+            **overrides,
         )
 
     return _make

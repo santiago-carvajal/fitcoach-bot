@@ -1,8 +1,6 @@
 # Issue tracker: GitHub
 
-> **Prerequisite:** this repo has no git remote yet (it isn't even initialized as a git repo). Init git and push to a GitHub remote before these `gh` commands will work — `gh` infers the repo from `git remote -v`.
-
-Issues and PRDs for this repo live as GitHub issues. Use the `gh` CLI for all operations.
+Repo: `santiago-carvajal/fitcoach-bot` (private). Issues and PRDs for this repo live as GitHub issues. Use the `gh` CLI for all operations.
 
 ## Conventions
 
