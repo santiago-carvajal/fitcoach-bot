@@ -1,4 +1,5 @@
-from langchain_anthropic import ChatAnthropic
+import os
+
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 
 from src.prompts.system_prompt import SYSTEM_PROMPT
@@ -7,9 +8,28 @@ from src.schemas.output_schemas import DietPlan, UserProfile, WorkoutRoutine
 from src.schemas.safety_schema import SafetyClassification
 from src.state import GraphState
 
-# Verifica el nombre de modelo vigente en la documentación de Anthropic
-# antes de desplegar; los strings de modelo cambian con el tiempo.
-llm = ChatAnthropic(model="claude-sonnet-5", temperature=0.3)
+
+def _build_llm():
+    """Proveedor configurable por LLM_PROVIDER (anthropic | openai).
+    Verifica los nombres de modelo vigentes en la documentación de cada
+    proveedor antes de desplegar; los strings de modelo cambian con el tiempo."""
+    provider = os.getenv("LLM_PROVIDER", "anthropic").lower()
+    if provider == "openai":
+        from langchain_openai import ChatOpenAI
+
+        return ChatOpenAI(
+            model=os.getenv("OPENAI_MODEL", "gpt-4o-mini"), temperature=0.3
+        )
+    if provider == "anthropic":
+        from langchain_anthropic import ChatAnthropic
+
+        return ChatAnthropic(
+            model=os.getenv("ANTHROPIC_MODEL", "claude-sonnet-5"), temperature=0.3
+        )
+    raise ValueError(f"LLM_PROVIDER no soportado: {provider}")
+
+
+llm = _build_llm()
 
 REQUIRED_FIELDS = [
     "age",
