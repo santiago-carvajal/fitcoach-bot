@@ -1,6 +1,9 @@
+from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage
 
-from src.db import repository
+load_dotenv()
+
+from src.db import repository  # noqa: E402
 from src.db.engine import create_db_and_tables
 from src.graph import build_graph
 
