@@ -1,50 +1,50 @@
-name,category,tags,allergen_tags,calories_kcal,protein_g,carbs_g,fat_g,notes
-Pechuga de pollo a la plancha,proteina,proteina magra musculo fuerza,carne,165,31.0,0.0,3.6,Cocida sin piel. Base proteica versátil para almuerzo o cena.
-Carne magra de res cocida,proteina,proteina musculo fuerza hierro,carne res,217,26.0,0.0,12.0,Corte magro (90/10) cocido. Buena fuente de hierro y creatina.
-Lomo de cerdo cocido,proteina,proteina magra musculo,carne cerdo,143,26.0,0.0,3.5,Corte magro de cerdo asado al horno.
-Salmón cocido,proteina,proteina omega 3 grasa saludable,pescado,206,22.0,0.0,12.0,Rico en omega-3. Ideal 2 veces por semana.
-Atún en lata al agua,proteina,proteina magra musculo practico,pescado,116,26.0,0.0,1.0,Escurrido. Opción práctica y económica de proteína magra.
-Tilapia cocida,proteina,proteina magra bajo en calorias,pescado,128,26.0,0.0,2.7,Pescado blanco magro de sabor suave.
-Camarones cocidos,proteina,proteina magra bajo en calorias,marisco,99,24.0,0.2,0.3,Muy altos en proteína y muy bajos en grasa.
-Huevo entero cocido,proteina,proteina desayuno versatil,huevo,155,13.0,1.1,11.0,Proteína completa de alta biodisponibilidad.
-Claras de huevo,proteina,proteina magra bajo en calorias,huevo,52,11.0,0.7,0.2,Proteína casi pura para sumar volumen sin grasa.
-Tofu firme,proteina,proteina vegetal vegano musculo,soja,144,15.5,3.5,8.7,Proteína vegetal completa. Saltear o hornear.
-Lentejas cocidas,legumbre,proteina vegetal fibra carbohidrato complejo saciante,,116,9.0,20.0,0.4,Legumbre alta en fibra y proteína vegetal.
-Garbanzos cocidos,legumbre,proteina vegetal fibra carbohidrato complejo saciante,,164,8.9,27.4,2.6,Base de ensaladas y guisos. Alta saciedad.
-Frijoles negros cocidos,legumbre,proteina vegetal fibra carbohidrato complejo saciante,,132,8.9,23.7,0.5,Legumbre económica rica en fibra y antioxidantes.
-Yogur griego natural descremado,lacteo,proteina magra desayuno saciante,lacteo lactosa,59,10.0,3.6,0.4,Sin azúcar agregada. Base de desayunos y snacks proteicos.
-Queso cottage bajo en grasa,lacteo,proteina magra saciante,lacteo lactosa,86,11.8,4.3,2.3,Alto en caseína. Buen snack nocturno.
-Leche descremada,lacteo,proteina calcio desayuno,lacteo lactosa,34,3.4,5.0,0.1,Para batidos y desayunos.
-Queso mozzarella semidescremado,lacteo,proteina calcio,lacteo lactosa,254,24.0,3.0,16.0,Usar en porciones moderadas.
-Proteína de suero en polvo,suplemento,proteina magra musculo batido,lacteo lactosa,400,80.0,10.0,5.0,Whey. Complemento práctico post-entrenamiento.
-Arroz blanco cocido,cereal,carbohidrato energia rapido,,130,2.7,28.2,0.3,Carbohidrato de digestión rápida ideal peri-entrenamiento.
-Arroz integral cocido,cereal,carbohidrato complejo energia fibra,,123,2.7,25.6,1.0,Más fibra y micronutrientes que el arroz blanco.
-Avena en hojuelas,cereal,carbohidrato complejo energia fibra desayuno saciante,gluten,389,16.9,66.3,6.9,Peso en seco. Con celiaquía usar avena certificada sin gluten.
-Pan integral de trigo,cereal,carbohidrato complejo fibra desayuno,gluten trigo,247,13.0,41.0,3.4,Preferir pan 100% integral.
-Pasta cocida,cereal,carbohidrato energia resistencia,gluten trigo,158,5.8,30.9,0.9,Carbohidrato clásico pre-entrenamiento de resistencia.
-Quinua cocida,cereal,carbohidrato complejo proteina vegetal fibra,,120,4.4,21.3,1.9,Pseudocereal con proteína completa. Sin gluten.
-Papa cocida,tuberculo,carbohidrato energia saciante bajo en calorias,,87,1.9,20.1,0.1,Muy saciante por caloría. Hervida o al horno.
-Batata cocida,tuberculo,carbohidrato complejo energia fibra,,90,2.0,20.7,0.2,Camote al horno. Rica en vitamina A.
-Tortilla de maíz,cereal,carbohidrato energia,,218,5.7,44.6,2.9,Sin gluten. Base de comidas rápidas.
-Maíz dulce cocido,verdura,carbohidrato energia fibra,,96,3.4,21.0,1.5,Guarnición dulce natural.
-Banano,fruta,carbohidrato energia rapido fruta,,89,1.1,22.8,0.3,Snack pre-entrenamiento por excelencia.
-Manzana,fruta,fruta fibra bajo en calorias saciante,,52,0.3,13.8,0.2,Snack portátil alto en fibra.
-Naranja,fruta,fruta vitamina c bajo en calorias,,47,0.9,11.8,0.1,Vitamina C y fibra.
-Fresas,fruta,fruta bajo en calorias fibra,,32,0.7,7.7,0.3,Muy bajas en calorías. Postre natural.
-Arándanos,fruta,fruta antioxidante bajo en calorias,,57,0.7,14.5,0.3,Antioxidantes para recuperación.
-Aguacate,grasa,grasa saludable fibra saciante,,160,2.0,8.5,14.7,Grasa monoinsaturada. Medir porción.
-Brócoli cocido,verdura,verdura fibra bajo en calorias saciante,,35,2.4,7.2,0.4,Volumen y micronutrientes con mínimas calorías.
-Espinaca cruda,verdura,verdura hierro bajo en calorias,,23,2.9,3.6,0.4,Base de ensaladas y batidos verdes.
-Zanahoria cruda,verdura,verdura fibra bajo en calorias,,41,0.9,9.6,0.2,Snack crujiente con vitamina A.
-Tomate,verdura,verdura bajo en calorias,,18,0.9,3.9,0.2,Base de ensaladas y salsas caseras.
-Lechuga romana,verdura,verdura bajo en calorias volumen,,17,1.2,3.3,0.3,Volumen de ensalada casi sin calorías.
-Pepino,verdura,verdura bajo en calorias volumen,,15,0.7,3.6,0.1,Hidratante y muy bajo en calorías.
-Calabacín cocido,verdura,verdura bajo en calorias volumen,,15,1.1,2.7,0.4,Guarnición ligera salteada o al vapor.
-Pimiento rojo,verdura,verdura vitamina c bajo en calorias,,31,1.0,6.0,0.3,Más vitamina C que la naranja.
-Aceite de oliva,grasa,grasa saludable cocina,,884,0.0,0.0,100.0,Grasa principal para cocinar y aliñar. Medir en cucharadas.
-Almendras,fruto_seco,grasa saludable proteina snack,fruto_seco,579,21.2,21.6,49.9,Snack denso en energía. Porción de 20-30 g.
-Nueces,fruto_seco,grasa saludable omega 3 snack,fruto_seco,654,15.2,13.7,65.2,Omega-3 vegetal. Porción de 20-30 g.
-Maní tostado,fruto_seco,grasa saludable proteina snack,mani,587,24.4,21.3,49.7,Técnicamente legumbre. Porción controlada.
-Mantequilla de maní,fruto_seco,grasa saludable proteina energia,mani,588,25.1,19.6,50.0,Sin azúcar agregada. Medir en cucharadas.
-Semillas de chía,semilla,grasa saludable fibra omega 3,,486,16.5,42.1,30.7,Para yogur avena o batidos.
-Miel,endulzante,carbohidrato energia rapido,miel,304,0.3,82.4,0.0,Endulzante natural. Usar con moderación.
+name,fdc_id,category,tags,allergen_tags,calories_kcal,protein_g,carbs_g,fat_g,notes
+Pechuga de pollo a la plancha,171477,proteina,proteina magra musculo fuerza,carne,165,31.0,0.0,3.6,Cocida sin piel. Base proteica versátil para almuerzo o cena.
+Carne magra de res cocida,171795,proteina,proteina musculo fuerza hierro,carne res,217,26.0,0.0,12.0,Corte magro (90/10) cocido. Buena fuente de hierro y creatina.
+Lomo de cerdo cocido,168254,proteina,proteina magra musculo,carne cerdo,143,26.0,0.0,3.5,Corte magro de cerdo asado al horno.
+Salmón cocido,171999,proteina,proteina omega 3 grasa saludable,pescado,206,22.0,0.0,12.0,Rico en omega-3. Ideal 2 veces por semana.
+Atún en lata al agua,334194,proteina,proteina magra musculo practico,pescado,116,26.0,0.0,1.0,Escurrido. Opción práctica y económica de proteína magra.
+Tilapia cocida,175177,proteina,proteina magra bajo en calorias,pescado,128,26.0,0.0,2.7,Pescado blanco magro de sabor suave.
+Camarones cocidos,175180,proteina,proteina magra bajo en calorias,marisco,99,24.0,0.2,0.3,Muy altos en proteína y muy bajos en grasa.
+Huevo entero cocido,172186,proteina,proteina desayuno versatil,huevo,155,13.0,1.1,11.0,Proteína completa de alta biodisponibilidad.
+Claras de huevo,172183,proteina,proteina magra bajo en calorias,huevo,52,11.0,0.7,0.2,Proteína casi pura para sumar volumen sin grasa.
+Tofu firme,172475,proteina,proteina vegetal vegano musculo,soja,144,15.5,3.5,8.7,Proteína vegetal completa. Saltear o hornear.
+Lentejas cocidas,172421,legumbre,proteina vegetal fibra carbohidrato complejo saciante,,116,9.0,20.0,0.4,Legumbre alta en fibra y proteína vegetal.
+Garbanzos cocidos,173757,legumbre,proteina vegetal fibra carbohidrato complejo saciante,,164,8.9,27.4,2.6,Base de ensaladas y guisos. Alta saciedad.
+Frijoles negros cocidos,173735,legumbre,proteina vegetal fibra carbohidrato complejo saciante,,132,8.9,23.7,0.5,Legumbre económica rica en fibra y antioxidantes.
+Yogur griego natural descremado,330137,lacteo,proteina magra desayuno saciante,lacteo lactosa,59,10.0,3.6,0.4,Sin azúcar agregada. Base de desayunos y snacks proteicos.
+Queso cottage bajo en grasa,173417,lacteo,proteina magra saciante,lacteo lactosa,86,11.8,4.3,2.3,Alto en caseína. Buen snack nocturno.
+Leche descremada,171270,lacteo,proteina calcio desayuno,lacteo lactosa,34,3.4,5.0,0.1,Para batidos y desayunos.
+Queso mozzarella semidescremado,170847,lacteo,proteina calcio,lacteo lactosa,254,24.0,3.0,16.0,Usar en porciones moderadas.
+Proteína de suero en polvo,173180,suplemento,proteina magra musculo batido,lacteo lactosa,400,80.0,10.0,5.0,Whey. Complemento práctico post-entrenamiento.
+Arroz blanco cocido,168878,cereal,carbohidrato energia rapido,,130,2.7,28.2,0.3,Carbohidrato de digestión rápida ideal peri-entrenamiento.
+Arroz integral cocido,169704,cereal,carbohidrato complejo energia fibra,,123,2.7,25.6,1.0,Más fibra y micronutrientes que el arroz blanco.
+Avena en hojuelas,173904,cereal,carbohidrato complejo energia fibra desayuno saciante,gluten,389,16.9,66.3,6.9,Peso en seco. Con celiaquía usar avena certificada sin gluten.
+Pan integral de trigo,2758994,cereal,carbohidrato complejo fibra desayuno,gluten trigo,247,13.0,41.0,3.4,Preferir pan 100% integral.
+Pasta cocida,172014,cereal,carbohidrato energia resistencia,gluten trigo,158,5.8,30.9,0.9,Carbohidrato clásico pre-entrenamiento de resistencia.
+Quinua cocida,168917,cereal,carbohidrato complejo proteina vegetal fibra,,120,4.4,21.3,1.9,Pseudocereal con proteína completa. Sin gluten.
+Papa cocida,170114,tuberculo,carbohidrato energia saciante bajo en calorias,,87,1.9,20.1,0.1,Muy saciante por caloría. Hervida o al horno.
+Batata cocida,168484,tuberculo,carbohidrato complejo energia fibra,,90,2.0,20.7,0.2,Camote al horno. Rica en vitamina A.
+Tortilla de maíz,2758997,cereal,carbohidrato energia,,218,5.7,44.6,2.9,Sin gluten. Base de comidas rápidas.
+Maíz dulce cocido,169999,verdura,carbohidrato energia fibra,,96,3.4,21.0,1.5,Guarnición dulce natural.
+Banano,173944,fruta,carbohidrato energia rapido fruta,,89,1.1,22.8,0.3,Snack pre-entrenamiento por excelencia.
+Manzana,1750340,fruta,fruta fibra bajo en calorias saciante,,52,0.3,13.8,0.2,Snack portátil alto en fibra.
+Naranja,746771,fruta,fruta vitamina c bajo en calorias,,47,0.9,11.8,0.1,Vitamina C y fibra.
+Fresas,2346409,fruta,fruta bajo en calorias fibra,,32,0.7,7.7,0.3,Muy bajas en calorías. Postre natural.
+Arándanos,2346411,fruta,fruta antioxidante bajo en calorias,,57,0.7,14.5,0.3,Antioxidantes para recuperación.
+Aguacate,2710824,grasa,grasa saludable fibra saciante,,160,2.0,8.5,14.7,Grasa monoinsaturada. Medir porción.
+Brócoli cocido,168510,verdura,verdura fibra bajo en calorias saciante,,35,2.4,7.2,0.4,Volumen y micronutrientes con mínimas calorías.
+Espinaca cruda,168462,verdura,verdura hierro bajo en calorias,,23,2.9,3.6,0.4,Base de ensaladas y batidos verdes.
+Zanahoria cruda,170393,verdura,verdura fibra bajo en calorias,,41,0.9,9.6,0.2,Snack crujiente con vitamina A.
+Tomate,170457,verdura,verdura bajo en calorias,,18,0.9,3.9,0.2,Base de ensaladas y salsas caseras.
+Lechuga romana,746769,verdura,verdura bajo en calorias volumen,,17,1.2,3.3,0.3,Volumen de ensalada casi sin calorías.
+Pepino,2346406,verdura,verdura bajo en calorias volumen,,15,0.7,3.6,0.1,Hidratante y muy bajo en calorías.
+Calabacín cocido,169292,verdura,verdura bajo en calorias volumen,,15,1.1,2.7,0.4,Guarnición ligera salteada o al vapor.
+Pimiento rojo,2258590,verdura,verdura vitamina c bajo en calorias,,31,1.0,6.0,0.3,Más vitamina C que la naranja.
+Aceite de oliva,748608,grasa,grasa saludable cocina,,884,0.0,0.0,100.0,Grasa principal para cocinar y aliñar. Medir en cucharadas.
+Almendras,2346393,fruto_seco,grasa saludable proteina snack,fruto_seco,579,21.2,21.6,49.9,Snack denso en energía. Porción de 20-30 g.
+Nueces,2346394,fruto_seco,grasa saludable omega 3 snack,fruto_seco,654,15.2,13.7,65.2,Omega-3 vegetal. Porción de 20-30 g.
+Maní tostado,174262,fruto_seco,grasa saludable proteina snack,mani,587,24.4,21.3,49.7,Técnicamente legumbre. Porción controlada.
+Mantequilla de maní,2262072,fruto_seco,grasa saludable proteina energia,mani,588,25.1,19.6,50.0,Sin azúcar agregada. Medir en cucharadas.
+Semillas de chía,2710819,semilla,grasa saludable fibra omega 3,,486,16.5,42.1,30.7,Para yogur avena o batidos.
+Miel,169640,endulzante,carbohidrato energia rapido,miel,304,0.3,82.4,0.0,Endulzante natural. Usar con moderación.

@@ -4,9 +4,9 @@ Catálogo de alimentos + retrieval TF-IDF en memoria (minsearch).
 El dataset (data/foods.csv) es un subconjunto curado de USDA FoodData
 Central (dominio público, CC0): valores nutricionales por 100 g tomados
 de las entradas genéricas (Foundation / SR Legacy) de cada alimento,
-redondeados, con nombres y notas en español propios del proyecto. El CSV
-no versiona el fdc_id por fila; ante una duda puntual, contrastar contra
-https://fdc.nal.usda.gov/.
+redondeados, con nombres y notas en español propios del proyecto. Cada
+fila trae su fdc_id de origen; para verificar un valor puntual, consultar
+https://fdc.nal.usda.gov/food-details/<fdc_id>/nutrients.
 
 Seam público: retrieve_foods(profile) — perfil entra, candidatos salen.
 La exclusión por alergias/restricciones declaradas ocurre acá, antes de

@@ -127,6 +127,7 @@ def test_candidates_are_catalog_rows_and_respect_num_results(make_profile):
     for c in candidates:
         assert {
             "name",
+            "fdc_id",
             "category",
             "allergen_tags",
             "calories_kcal",
@@ -134,3 +135,12 @@ def test_candidates_are_catalog_rows_and_respect_num_results(make_profile):
             "carbs_g",
             "fat_g",
         } <= set(c)
+
+
+def test_every_food_traces_to_a_usda_fdc_id():
+    from src.retrieval.food_catalog import _default_catalog
+
+    for food in _default_catalog().foods:
+        assert food["fdc_id"].isdigit(), (
+            f"'{food['name']}' debe traer un fdc_id numerico trazable a USDA FDC"
+        )
