@@ -2,6 +2,7 @@ from langchain_anthropic import ChatAnthropic
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 
 from src.prompts.system_prompt import SYSTEM_PROMPT
+from src.retrieval.exercise_catalog import format_candidates, retrieve_exercises
 from src.schemas.output_schemas import DietPlan, UserProfile, WorkoutRoutine
 from src.schemas.safety_schema import SafetyClassification
 from src.state import GraphState
@@ -136,6 +137,10 @@ def ask_missing_node(state: GraphState) -> GraphState:
 
 
 def generate_routine_node(state: GraphState) -> GraphState:
+    """Genera la rutina anclada en el catálogo real: los candidatos ya vienen
+    filtrados por el equipo del usuario y rankeados hacia su objetivo, y el
+    prompt prohíbe inventar ejercicios fuera de esa lista."""
+    candidates = retrieve_exercises(state["user_profile"])
     generator = llm.with_structured_output(WorkoutRoutine)
     routine = generator.invoke(
         [
@@ -143,7 +148,16 @@ def generate_routine_node(state: GraphState) -> GraphState:
             HumanMessage(
                 content=(
                     "Genera una rutina de ejercicios para este perfil "
-                    f"(JSON): {state['user_profile'].model_dump_json()}"
+                    f"(JSON): {state['user_profile'].model_dump_json()}\n\n"
+                    "CATÁLOGO DE EJERCICIOS PERMITIDOS (ya filtrado según el "
+                    "equipo declarado por el usuario y priorizado según su "
+                    "objetivo):\n"
+                    f"{format_candidates(candidates)}\n\n"
+                    "Usa ÚNICAMENTE ejercicios de este catálogo, con sus "
+                    "nombres exactos. No inventes ejercicios fuera de la "
+                    "lista; solo se permiten variantes triviales de ejecución "
+                    "(por ejemplo cambiar agarre, tempo o apoyo) indicadas en "
+                    "las notas del ejercicio."
                 )
             ),
         ]

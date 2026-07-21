@@ -5,7 +5,7 @@ Plancha abdominal,Core,sin_equipo,isometrico,abdomen zona media,3,30-45s,45,Mant
 Zancadas alternadas,Piernas,sin_equipo,empuje,cuadriceps gluteos,3,10-12 por pierna,60,Baja controlado la rodilla de atras casi toca el piso.
 Dominadas asistidas con banda,Espalda,sin_equipo,traccion,espalda biceps,3,6-10,90,Si no hay banda reemplazar por remo invertido en mesa baja.
 Puente de gluteo,Piernas,sin_equipo,empuje de cadera,gluteos isquiotibiales,3,12-15,45,Apreta el gluteo arriba un segundo antes de bajar.
-Eliptica o cinta,Cardio,sin_equipo,cardio,sistema cardiovascular,1,20-30 min,0,Ritmo moderado deberias poder hablar en frases cortas mientras entrenas.
+Caminata rapida o trote continuo,Cardio,sin_equipo,cardio,sistema cardiovascular,1,20-30 min,0,Ritmo moderado deberias poder hablar en frases cortas mientras entrenas.
 Burpees,Full body,sin_equipo,cardio,full body,3,30-45s,45,Escala la intensidad quitando el salto final si hace falta.
 Remo con mancuerna a una mano,Espalda,casa_mancuernas,traccion,espalda biceps,3,10-12 por lado,60,Apoya una mano y rodilla en un banco para estabilizar el torso.
 Press de hombros con mancuernas,Hombros,casa_mancuernas,empuje,hombros triceps,3,8-12,60,Evita arquear la espalda baja al empujar.
@@ -17,3 +17,27 @@ Sentadilla con barra,Piernas,gimnasio_completo,empuje,cuadriceps gluteos,4,5-8,1
 Peso muerto convencional,Espalda,gimnasio_completo,bisagra de cadera,espalda isquiotibiales,4,5-8,150,Prioriza tecnica sobre carga especialmente al empezar.
 Jalon al pecho en polea,Espalda,gimnasio_completo,traccion,espalda biceps,3,10-12,75,Lleva el torso ligeramente hacia atras sin balancear el cuerpo.
 Prensa de piernas,Piernas,gimnasio_completo,empuje,cuadriceps gluteos,3,10-15,90,No bloquees las rodillas por completo arriba.
+Fondos de triceps en banco,Brazos,sin_equipo,empuje,triceps hombros,3,8-12,60,Usa una silla firme y baja controlado sin encoger los hombros.
+Escaladores,Cardio,sin_equipo,cardio,full body abdomen,3,30-45s,45,Lleva las rodillas al pecho a ritmo constante sin levantar la cadera.
+Sentadilla isometrica en pared,Piernas,sin_equipo,isometrico,cuadriceps,3,30-45s,60,Mantene la espalda pegada a la pared y las rodillas a 90 grados.
+Superman en el piso,Espalda,sin_equipo,extension,espalda baja gluteos,3,12-15,45,Eleva brazos y piernas a la vez y sostene un segundo arriba.
+Saltos de tijera,Cardio,sin_equipo,cardio,sistema cardiovascular,3,45-60s,30,Ritmo agil y constante amortigua la caida con las rodillas.
+Elevaciones de talones de pie,Piernas,sin_equipo,empuje,pantorrillas,3,15-20,45,Sube lento hasta la punta del pie y baja en dos segundos.
+Abdominales bicicleta,Core,sin_equipo,rotacion,abdomen oblicuos,3,12-15 por lado,45,Lleva el codo hacia la rodilla contraria sin tirar del cuello.
+Sentadilla con salto,Cardio,sin_equipo,cardio,cuadriceps gluteos sistema cardiovascular,3,10-12,60,Aterriza suave con las rodillas apenas flexionadas.
+Remo inclinado con mancuernas,Espalda,casa_mancuernas,traccion,espalda biceps,3,10-12,75,Torso inclinado a 45 grados y espalda neutra durante todo el movimiento.
+Press de pecho con mancuernas en piso,Empuje,casa_mancuernas,empuje,pecho triceps,3,8-12,75,Apoya la espalda en el piso y baja los codos hasta rozar el suelo.
+Elevaciones laterales con mancuernas,Hombros,casa_mancuernas,empuje,hombros,3,12-15,45,Sube hasta la altura de los hombros sin balancear el torso.
+Extension de triceps sobre la cabeza,Brazos,casa_mancuernas,empuje,triceps,3,10-15,45,Codos apuntando al techo y pegados a la cabeza durante todo el gesto.
+Zancadas con mancuernas,Piernas,casa_mancuernas,empuje,cuadriceps gluteos,3,10-12 por pierna,75,Paso largo y torso vertical con las mancuernas colgando a los costados.
+Swing con mancuerna,Cardio,casa_mancuernas,bisagra de cadera,gluteos isquiotibiales sistema cardiovascular,3,15-20,60,El impulso nace de la cadera no de los brazos.
+Remo renegado,Full body,casa_mancuernas,traccion,espalda abdomen brazos,3,8-10 por lado,75,Desde posicion de plancha rema sin rotar la cadera.
+Encogimientos de hombros con mancuernas,Hombros,casa_mancuernas,traccion,trapecios,3,12-15,45,Sube los hombros hacia las orejas y baja lento sin girar el cuello.
+Remo con barra,Espalda,gimnasio_completo,traccion,espalda biceps,4,6-10,120,Torso inclinado y barra hacia el ombligo sin usar impulso.
+Press militar con barra,Hombros,gimnasio_completo,empuje,hombros triceps,4,6-10,120,Apreta gluteos y abdomen para no arquear la espalda baja.
+Extension de piernas en maquina,Piernas,gimnasio_completo,empuje,cuadriceps,3,12-15,60,Movimiento controlado sin azotar el peso al bajar.
+Curl femoral en maquina,Piernas,gimnasio_completo,traccion,isquiotibiales,3,10-15,60,Baja el peso en dos segundos para trabajar la fase excentrica.
+Remo en polea baja,Espalda,gimnasio_completo,traccion,espalda biceps,3,10-12,75,Pecho arriba y codos pegados al cuerpo al tirar.
+Cruce de poleas para pecho,Empuje,gimnasio_completo,empuje,pecho,3,12-15,60,Junta las manos al frente con una leve flexion de codos.
+Hip thrust con barra,Piernas,gimnasio_completo,empuje de cadera,gluteos isquiotibiales,4,8-12,90,Apoya la espalda alta en un banco y apreta el gluteo arriba un segundo.
+Remo en maquina de cardio,Cardio,gimnasio_completo,cardio,sistema cardiovascular espalda,1,15-20 min,0,Ritmo sostenido las piernas empujan primero y los brazos terminan el gesto.

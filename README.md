@@ -11,10 +11,16 @@ fitcoach-bot/
 ├── main.py                    # loop de prueba por terminal
 ├── requirements.txt
 ├── .env.example
+├── data/
+│   └── exercises.csv           # catálogo original de ejercicios (RAG)
+├── tests/                      # seams: retrieval (sin LLM) y nodos (LLM mockeado)
 └── src/
     ├── state.py                # estado compartido del grafo (GraphState)
     ├── graph.py                # arma el grafo y el enrutamiento
     ├── nodes.py                # lógica de cada nodo (llamadas al LLM)
+    ├── db/                     # persistencia SQLite (SQLModel)
+    ├── retrieval/
+    │   └── exercise_catalog.py # retrieval TF-IDF (minsearch) sobre el catálogo
     ├── prompts/
     │   └── system_prompt.py    # persona y reglas del coach
     └── schemas/
@@ -32,6 +38,14 @@ Cada turno del usuario vuelve a entrar por `collect_profile`, que va
 completando el `UserProfile` acumulado hasta que no falte nada crítico.
 Ahí recién se generan rutina y dieta como JSON estructurado (Pydantic),
 y `format_output` los convierte en un mensaje legible.
+
+`generate_routine` no inventa ejercicios: antes de llamar al LLM
+recupera candidatos de `data/exercises.csv` vía `minsearch` (TF-IDF en
+memoria), filtrados por el equipo declarado del usuario (jerarquía
+sin_equipo ⊂ casa_mancuernas ⊂ gimnasio_completo) y rankeados hacia su
+objetivo, y el prompt le prohíbe salirse de esa lista. El dataset es
+original de este proyecto; del repo de referencia solo se reusa el
+patrón CSV + minsearch (ver sección siguiente).
 
 ## Cómo correrlo
 
