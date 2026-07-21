@@ -4,6 +4,7 @@ from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 
 from src.prompts.system_prompt import SYSTEM_PROMPT
 from src.retrieval.exercise_catalog import format_candidates, retrieve_exercises
+from src.retrieval.food_catalog import format_food_candidates, retrieve_foods
 from src.schemas.output_schemas import DietPlan, UserProfile, WorkoutRoutine
 from src.schemas.safety_schema import SafetyClassification
 from src.state import GraphState
@@ -201,6 +202,11 @@ def generate_routine_node(state: GraphState) -> GraphState:
 
 
 def generate_diet_node(state: GraphState) -> GraphState:
+    """Genera la dieta anclada en el catálogo USDA real: los candidatos ya
+    vienen depurados de alergias/restricciones del usuario y priorizados hacia
+    su objetivo, y el prompt prohíbe inventar alimentos o valores fuera de esa
+    lista."""
+    candidates = retrieve_foods(state["user_profile"], num_results=25)
     generator = llm.with_structured_output(DietPlan)
     diet = generator.invoke(
         [
@@ -208,7 +214,25 @@ def generate_diet_node(state: GraphState) -> GraphState:
             HumanMessage(
                 content=(
                     "Genera un plan de alimentación para este perfil "
-                    f"(JSON): {state['user_profile'].model_dump_json()}"
+                    f"(JSON): {state['user_profile'].model_dump_json()}\n\n"
+                    "CATÁLOGO DE ALIMENTOS PERMITIDOS (subconjunto de USDA "
+                    "FoodData Central, ya depurado según las alergias y "
+                    "restricciones declaradas por el usuario y priorizado "
+                    "según su objetivo):\n"
+                    f"{format_food_candidates(candidates)}\n\n"
+                    "Usa ÚNICAMENTE alimentos de este catálogo, con sus "
+                    "nombres exactos. No inventes alimentos ni valores "
+                    "nutricionales fuera de la lista: las calorías y macros "
+                    "de cada comida deben salir de los valores por 100 g del "
+                    "catálogo, escalados a la porción que indiques en gramos.\n\n"
+                    "Reglas de composición del plan:\n"
+                    "- Indica la porción en gramos de cada alimento dentro de "
+                    "cada comida (ej.: 'Arroz blanco cocido (150 g)').\n"
+                    "- Los totales diarios deben ser coherentes con la suma "
+                    "de las comidas.\n"
+                    "- No incluyas ningún alimento vetado por las alergias o "
+                    "restricciones del perfil, ni siquiera como sugerencia "
+                    "opcional."
                 )
             ),
         ]

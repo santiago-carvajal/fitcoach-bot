@@ -14,6 +14,53 @@ from src.schemas.output_schemas import (  # noqa: E402
 )
 
 
+class FakeStructuredLLM:
+    """LLM falso para tests de seams de grafo: captura los mensajes que
+    recibe y devuelve una respuesta enlatada."""
+
+    def __init__(self, response):
+        self.response = response
+        self.received_messages = None
+
+    def invoke(self, messages):
+        self.received_messages = messages
+        return self.response
+
+
+@pytest.fixture
+def make_fake_llm():
+    """Factory del LLM falso, para no duplicar la clase en cada test de nodo."""
+
+    def _make(response) -> FakeStructuredLLM:
+        return FakeStructuredLLM(response)
+
+    return _make
+
+
+@pytest.fixture
+def make_state():
+    """Estado base completo del grafo listo para generar, con overrides."""
+
+    def _make(profile, **overrides) -> dict:
+        state = {
+            "messages": [],
+            "user_profile": profile,
+            "missing_fields": [],
+            "routine": None,
+            "diet": None,
+            "stage": "ready_to_generate",
+            "safety_flag": False,
+            "feedback_notes": None,
+            "week_number": 202630,
+            "previous_routine": None,
+            "previous_diet": None,
+        }
+        state.update(overrides)
+        return state
+
+    return _make
+
+
 @pytest.fixture
 def make_profile():
     """Factory de perfiles completos; varía solo equipo y objetivo."""

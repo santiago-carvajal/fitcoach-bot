@@ -11,40 +11,18 @@ from src.retrieval.exercise_catalog import retrieve_exercises
 from src.schemas.output_schemas import Equipment, WorkoutRoutine
 
 
-class FakeStructuredLLM:
-    def __init__(self, response):
-        self.response = response
-        self.received_messages = None
-
-    def invoke(self, messages):
-        self.received_messages = messages
-        return self.response
-
-
-def test_routine_prompt_is_grounded_in_retrieved_candidates(monkeypatch, make_profile):
+def test_routine_prompt_is_grounded_in_retrieved_candidates(
+    monkeypatch, make_profile, make_fake_llm, make_state
+):
     profile = make_profile(Equipment.BODYWEIGHT)
     canned = WorkoutRoutine(days=[], general_notes="ok")
-    fake = FakeStructuredLLM(canned)
+    fake = make_fake_llm(canned)
     monkeypatch.setattr(
         "src.nodes.llm",
         SimpleNamespace(with_structured_output=lambda schema: fake),
     )
 
-    state = {
-        "messages": [],
-        "user_profile": profile,
-        "missing_fields": [],
-        "routine": None,
-        "diet": None,
-        "stage": "ready_to_generate",
-        "safety_flag": False,
-        "feedback_notes": None,
-        "week_number": 202630,
-        "previous_routine": None,
-        "previous_diet": None,
-    }
-
-    result = generate_routine_node(state)
+    result = generate_routine_node(make_state(profile))
 
     assert result["routine"] is canned
     prompt_text = "\n".join(str(m.content) for m in fake.received_messages)
