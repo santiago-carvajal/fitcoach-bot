@@ -54,6 +54,8 @@ def make_state():
             "week_number": 202630,
             "previous_routine": None,
             "previous_diet": None,
+            "active_plan_week": None,
+            "feedback_classification": None,
         }
         state.update(overrides)
         return state
