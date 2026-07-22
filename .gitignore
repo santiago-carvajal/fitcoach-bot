@@ -10,3 +10,6 @@ env/
 *.egg-info/
 .pytest_cache/
 .mypy_cache/
+
+# Config local de Claude Code (permisos por máquina; no se comparte)
+.claude/settings.local.json
