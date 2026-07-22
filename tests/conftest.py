@@ -27,12 +27,57 @@ class FakeStructuredLLM:
         return self.response
 
 
+class FakeGraphLLM:
+    """LLM falso para invocar el grafo COMPLETO: enruta cada llamada de
+    with_structured_output según el esquema pedido y captura los mensajes,
+    para poder afirmar qué prompt recibió cada nodo. invoke() (texto libre,
+    ej. ask_missing/format_output) devuelve plain_response."""
+
+    def __init__(self, responses, plain_response):
+        # responses: dict {schema_class: instancia enlatada}
+        self.responses = responses
+        self.plain_response = plain_response
+        self.structured_calls = []  # [(schema, messages)]
+        self.plain_calls = []  # [messages]
+
+    def with_structured_output(self, schema):
+        outer = self
+
+        class _Bound:
+            def invoke(self, messages):
+                outer.structured_calls.append((schema, messages))
+                return outer.responses[schema]
+
+        return _Bound()
+
+    def invoke(self, messages):
+        self.plain_calls.append(messages)
+        return self.plain_response
+
+    def prompt_for(self, schema) -> str:
+        """Concatena el prompt de la primera llamada estructurada a `schema`."""
+        for called_schema, messages in self.structured_calls:
+            if called_schema is schema:
+                return "\n".join(str(m.content) for m in messages)
+        return ""
+
+
 @pytest.fixture
 def make_fake_llm():
     """Factory del LLM falso, para no duplicar la clase en cada test de nodo."""
 
     def _make(response) -> FakeStructuredLLM:
         return FakeStructuredLLM(response)
+
+    return _make
+
+
+@pytest.fixture
+def make_graph_llm():
+    """Factory del LLM falso para invocar el grafo completo (ver FakeGraphLLM)."""
+
+    def _make(responses, plain_response) -> FakeGraphLLM:
+        return FakeGraphLLM(responses, plain_response)
 
     return _make
 

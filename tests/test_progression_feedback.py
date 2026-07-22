@@ -18,38 +18,8 @@ from src.graph import build_graph
 from src.schemas.output_schemas import DietPlan, WorkoutRoutine
 from src.schemas.safety_schema import FeedbackClassification, SafetyClassification
 
-
-class FakeGraphLLM:
-    """LLM falso para invocar el grafo completo: enruta cada llamada de
-    with_structured_output según el esquema pedido y captura los mensajes,
-    para poder afirmar qué prompt recibió cada nodo."""
-
-    def __init__(self, responses, plain_response):
-        # responses: dict {schema_class: instancia enlatada}
-        self.responses = responses
-        self.plain_response = plain_response
-        self.structured_calls = []  # [(schema, messages)]
-        self.plain_calls = []  # [messages]
-
-    def with_structured_output(self, schema):
-        outer = self
-
-        class _Bound:
-            def invoke(self, messages):
-                outer.structured_calls.append((schema, messages))
-                return outer.responses[schema]
-
-        return _Bound()
-
-    def invoke(self, messages):
-        self.plain_calls.append(messages)
-        return self.plain_response
-
-    def prompt_for(self, schema) -> str:
-        for called_schema, messages in self.structured_calls:
-            if called_schema is schema:
-                return "\n".join(str(m.content) for m in messages)
-        return ""
+# El LLM falso que enruta por esquema (FakeGraphLLM) vive en conftest y se
+# obtiene con la fixture make_graph_llm, compartido con los tests de la API.
 
 
 def _install_fake(monkeypatch, fake):
@@ -77,7 +47,7 @@ def _active_plan_state(make_state, profile, user_text, **overrides):
 
 
 def test_feedback_pidiendo_ajuste_regenera_rutina_y_dieta(
-    monkeypatch, make_profile, make_state
+    monkeypatch, make_profile, make_state, make_graph_llm
 ):
     from src.schemas.output_schemas import Equipment
 
@@ -86,7 +56,7 @@ def test_feedback_pidiendo_ajuste_regenera_rutina_y_dieta(
     new_diet = DietPlan(
         daily_calories=2300, protein_g=170, carbs_g=210, fat_g=65, meals=[]
     )
-    fake = FakeGraphLLM(
+    fake = make_graph_llm(
         responses={
             type(profile): profile,
             SafetyClassification: SafetyClassification(
@@ -129,12 +99,12 @@ def test_feedback_pidiendo_ajuste_regenera_rutina_y_dieta(
 
 
 def test_feedback_casual_no_regenera_y_responde_conversacional(
-    monkeypatch, make_profile, make_state
+    monkeypatch, make_profile, make_state, make_graph_llm
 ):
     from src.schemas.output_schemas import Equipment
 
     profile = make_profile(Equipment.FULL_GYM)
-    fake = FakeGraphLLM(
+    fake = make_graph_llm(
         responses={
             type(profile): profile,
             SafetyClassification: SafetyClassification(
@@ -171,12 +141,12 @@ def test_feedback_casual_no_regenera_y_responde_conversacional(
 
 
 def test_lesion_dispara_guardrail_antes_de_clasificar_feedback(
-    monkeypatch, make_profile, make_state
+    monkeypatch, make_profile, make_state, make_graph_llm
 ):
     from src.schemas.output_schemas import Equipment
 
     profile = make_profile(Equipment.FULL_GYM)
-    fake = FakeGraphLLM(
+    fake = make_graph_llm(
         responses={
             type(profile): profile,
             SafetyClassification: SafetyClassification(
@@ -211,12 +181,12 @@ def test_lesion_dispara_guardrail_antes_de_clasificar_feedback(
 
 
 def test_semana_transcurrida_ofrece_check_in_proactivo(
-    monkeypatch, make_profile, make_state
+    monkeypatch, make_profile, make_state, make_graph_llm
 ):
     from src.schemas.output_schemas import Equipment
 
     profile = make_profile(Equipment.FULL_GYM)
-    fake = FakeGraphLLM(
+    fake = make_graph_llm(
         responses={
             type(profile): profile,
             SafetyClassification: SafetyClassification(
