@@ -143,6 +143,22 @@ def test_chat_endpoint_rechaza_mensaje_vacio(temp_db):
     assert response.status_code == 400
 
 
+def test_sirve_la_pagina_estatica_y_sus_assets(temp_db):
+    # El frontend (issue #6) se sirve desde la misma app: index.html en "/" y
+    # los assets en "/static".
+    with TestClient(create_app()) as client:
+        index = client.get("/")
+        app_js = client.get("/static/app.js")
+        styles = client.get("/static/styles.css")
+
+    assert index.status_code == 200
+    assert "text/html" in index.headers["content-type"]
+    assert "<title>Coach IA" in index.text
+    assert app_js.status_code == 200
+    assert "/state" in app_js.text and "/chat" in app_js.text
+    assert styles.status_code == 200
+
+
 def test_estado_persiste_a_traves_de_un_reinicio(temp_db, make_graph_llm, monkeypatch):
     partial = UserProfile(age=25, goal=Goal.GAIN_MUSCLE)
     fake = make_graph_llm(

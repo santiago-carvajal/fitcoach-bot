@@ -11,11 +11,15 @@ propósito: así importar este módulo no crea tablas ni toca la DB (eso permite
 tests con una SQLite temporal por caso).
 """
 
+from pathlib import Path
+
 from dotenv import load_dotenv
 
 load_dotenv()
 
 from fastapi import FastAPI, HTTPException  # noqa: E402
+from fastapi.responses import FileResponse  # noqa: E402
+from fastapi.staticfiles import StaticFiles  # noqa: E402
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage  # noqa: E402
 from pydantic import BaseModel  # noqa: E402
 
@@ -26,6 +30,9 @@ from src.session import advance_turn  # noqa: E402
 from src.state import GraphState  # noqa: E402
 
 _MESSAGE_ROLE = {HumanMessage: "human", AIMessage: "ai", SystemMessage: "system"}
+# El frontend estático (issue #6) vive en <repo>/static y lo sirve esta misma
+# app: index.html en "/" y los assets en "/static".
+STATIC_DIR = Path(__file__).resolve().parent.parent / "static"
 
 
 class ChatRequest(BaseModel):
@@ -73,6 +80,15 @@ def create_app() -> FastAPI:
     @app.get("/state")
     def get_state() -> dict:
         return _serialize_state(repository.load_full_state())
+
+    @app.get("/")
+    def index() -> FileResponse:
+        """Sirve la página estática del chat (frontend delgado de la API)."""
+        return FileResponse(STATIC_DIR / "index.html")
+
+    # Assets estáticos (JS/CSS) bajo el prefijo /static, que no se solapa con
+    # las rutas de la API (/chat, /state) ni con "/".
+    app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
     return app
 
