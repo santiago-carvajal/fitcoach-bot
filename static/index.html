@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coach IA — Tu entrenador y nutriólogo virtual</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>Coach IA</h1>
+    <p class="tagline">Tu entrenador personal y asesor de nutrición virtual</p>
+  </header>
+
+  <main class="layout">
+    <!-- Columna de conversación -->
+    <section class="chat" aria-label="Conversación">
+      <div id="messages" class="messages" aria-live="polite"></div>
+
+      <form id="chat-form" class="chat-form" autocomplete="off">
+        <input
+          id="chat-input"
+          class="chat-input"
+          type="text"
+          placeholder="Escribe tu mensaje…"
+          aria-label="Mensaje"
+          required
+        />
+        <button id="send-btn" class="send-btn" type="submit">Enviar</button>
+      </form>
+      <p id="error" class="error" role="alert" hidden></p>
+    </section>
+
+    <!-- Columna del plan actual -->
+    <aside class="plan" aria-label="Tu plan actual">
+      <h2>Tu plan</h2>
+      <div id="plan-empty" class="plan-empty">
+        Todavía no tienes un plan. Cuéntale a Coach IA sobre ti y tu objetivo
+        para generar tu rutina y dieta.
+      </div>
+      <div id="plan-content" class="plan-content" hidden>
+        <div id="routine" class="plan-block"></div>
+        <div id="diet" class="plan-block"></div>
+      </div>
+    </aside>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
